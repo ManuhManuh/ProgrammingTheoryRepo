@@ -5,7 +5,19 @@ using UnityEngine.AI;
 
 public class Chicken : MonoBehaviour
 {
- 
+    public int cholocateCount;
+    public int pepperCount;
+    public int seedCount;
+
+    public bool IsHungry
+    {
+        get { return isHungry; }
+        set { isHungry = value; }
+    }
+    private bool isHungry;
+
+    private bool onNest;
+
     [SerializeField] private float jumpForce;
 
     private NavMeshAgent agentChicken;
@@ -14,6 +26,9 @@ public class Chicken : MonoBehaviour
     void Start()
     {
         agentChicken = GetComponent<NavMeshAgent>();
+        cholocateCount = 0;
+        pepperCount = 0;
+        seedCount = 0;
     }
 
     // Update is called once per frame
@@ -36,6 +51,26 @@ public class Chicken : MonoBehaviour
         {
             agentChicken.destination = hit.point;
         }
+
+    }
+
+    private void Eat(Food food)
+    {
+        
+    }
+
+    private void LayEgg(HardBoiled egg)
+    {
+
+    }
+
+    private void LayEgg(EasterCream egg)
+    {
+
+    }
+
+    private void LayEgg(ChickToBe egg)
+    {
 
     }
 }
