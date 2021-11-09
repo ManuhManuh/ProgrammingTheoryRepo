@@ -14,8 +14,7 @@ public class ChickenJoke : MonoBehaviour
     private string SelectJoke()
     {
         int index = Random.Range(0, jokes.Count - 1);
-
         return jokes[index];
-        
+
     }
 }

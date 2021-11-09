@@ -61,7 +61,7 @@ public class Chicken : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             // Do whatever is being tested
-            agentChicken.SetDestination(nest.transform.position);
+           // agentChicken.SetDestination(nest.transform.position);
 
         }
 
