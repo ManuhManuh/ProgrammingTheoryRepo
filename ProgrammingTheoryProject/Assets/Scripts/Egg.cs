@@ -4,12 +4,26 @@ using UnityEngine;
 
 public class Egg : MonoBehaviour
 {
+    private Rigidbody eggRB;
+    private void Start()
+    {
+        eggRB = GetComponent<Rigidbody>();
+        StartCoroutine(CommenceToHatch());
+    }
+
+    private IEnumerator CommenceToHatch()
+    {
+        yield return new WaitForSeconds(3);
+        Hatch();
+    }
     public virtual void Hatch()
     {
-        // wait a few seconds
+        // stop the egg from reacting to physics (hatching will be animated)
+        eggRB.isKinematic = true;
 
-        // Egg hops up and down
+        // Other Hatch behaviour will exist in overridden methods
 
-        // Egg cracks open
+        // Tell Game manager that egg has hatched
+        GameManager.Instance.CheckForWin(this);
     }
 }

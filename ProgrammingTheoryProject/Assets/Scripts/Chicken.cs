@@ -5,30 +5,30 @@ using UnityEngine.AI;
 
 public class Chicken : MonoBehaviour
 {
-    
+
     // ENCAPSULATION
+
+    private bool isHungry = true;
     public bool IsHungry
     {
         get { return isHungry; }
-        set { isHungry = value; }
     }
-    private bool isHungry;
-
-    [SerializeField] private int maxFoodValue;
+    
     [SerializeField] private Nest nest;
     [SerializeField] private EasterCream easterCreamPrefab;
     [SerializeField] private HardBoiled hardBoildedPrefab;
     [SerializeField] private ChickToBe chickToBePrefab;
     [SerializeField] private float eggOffset;
 
+    private int maxFoodValue;
     private int cholocateCount;
     private int pepperCount;
     private int seedCount;
     private int totalFood;
     private bool eggLaid;
    
-
     private NavMeshAgent agentChicken;
+
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +38,7 @@ public class Chicken : MonoBehaviour
         pepperCount = 0;
         seedCount = 0;
         totalFood = 0;
+        maxFoodValue = Random.Range(10, 25);
     }
 
     // Update is called once per frame
@@ -61,8 +62,8 @@ public class Chicken : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             // Do whatever is being tested
-           // agentChicken.SetDestination(nest.transform.position);
-
+            // agentChicken.SetDestination(nest.transform.position);
+            //Debug.Log($"Am I (chicken) hungry?: {IsHungry}");
         }
 
     }
@@ -78,7 +79,7 @@ public class Chicken : MonoBehaviour
 
     }
 
-    private void Eat(Food food, int foodValue)
+    public void Eat(Food food, int foodValue)
     {
         // local UI - "gulp"
 
@@ -114,10 +115,11 @@ public class Chicken : MonoBehaviour
             //set the chicken to not hungry
             isHungry = false;
 
-            // go to the nest
-            agentChicken.SetDestination(nest.transform.position);
         }
 
+        
+        Destroy(food.gameObject);
+        
     }
 
     private void InitiateLaying()

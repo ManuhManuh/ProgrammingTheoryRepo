@@ -6,14 +6,9 @@ public class ChickenJoke : MonoBehaviour
 {
     [SerializeField] List<string> jokes = new List<string>();
 
-    public string Joke
+    public string SelectJoke()
     {
-        get { return SelectJoke(); }
-    }
-
-    private string SelectJoke()
-    {
-        int index = Random.Range(0, jokes.Count - 1);
+        int index = Random.Range(0, jokes.Count);
         return jokes[index];
 
     }
