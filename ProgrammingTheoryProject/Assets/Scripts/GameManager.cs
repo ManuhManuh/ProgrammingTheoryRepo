@@ -15,6 +15,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<Egg> eggs = new List<Egg>();
     [SerializeField] private TMP_Text winCheckText;
     private Egg winningEgg;
+    private string laidEggType;
+    private string winningEggType;
+    private string laidEggPhrase;
+    private string winningEggPhrase;
 
     private void Awake()
     {
@@ -37,24 +41,73 @@ public class GameManager : MonoBehaviour
         //Debug.Log($"The winning egg type is {winningEgg.GetType()}");
     }
 
-    public bool IsWinningType(Egg laidEgg)
-    {
-        return laidEgg.GetType() == winningEgg.GetType();
-    }
-
     public void CheckForWin(Egg laidEgg)
     {
+        laidEggType = laidEgg.GetType().ToString();
+
+        switch (laidEggType)
+        {
+            case "EasterCream":
+                {
+                    laidEggPhrase = "an Easter Cream Egg";
+                    break;
+                }
+            case "HardBoiled":
+                {
+                    laidEggPhrase = "a Hard Boiled Egg";
+                    break;
+                }
+            case "ChickToBe":
+                {
+                    laidEggPhrase = " a Proper Chicken Egg";
+                    break;
+                }
+
+        }
+
+        //Debug.Log($"Laid egg phrase is: {laidEggPhrase}");
+
         if (IsWinningType(laidEgg))
         {
-            winCheckText.text = "You laid the winning egg type - congratulations!!";
-            
+            winCheckText.text = $"Congratulations!!  You laid {laidEggPhrase}!!!";
         }
         else
         {
-            winCheckText.text = "You laid the wrong egg type - cry in shame!!";
+            winCheckText.text = $"Such shame!!  You laid {laidEggPhrase} when you should have laid {winningEggPhrase}!!";
         }
 
+
+       
         // TODO: Add replay button
+
+     
     }
+
+    public bool IsWinningType(Egg laidEgg)
+    {
+        winningEggType = winningEgg.GetType().ToString();
+        switch (winningEggType)
+        {
+            case "EasterCream":
+                {
+                    winningEggPhrase = "an Easter Cream Egg";
+                    break;
+                }
+            case "HardBoiled":
+                {
+                    winningEggPhrase = "a Hard Boiled Egg";
+                    break;
+                }
+            case "ChickToBe":
+                {
+                    winningEggPhrase = " a Proper Chicken Egg";
+                    break;
+                }
+        }
+        //Debug.Log($"Winning egg phrase is: {winningEggPhrase}");
+
+        return laidEggType == winningEggType;
+    }
+
 
 }

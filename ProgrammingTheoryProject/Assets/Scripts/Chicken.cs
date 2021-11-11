@@ -28,17 +28,19 @@ public class Chicken : MonoBehaviour
     private bool eggLaid;
    
     private NavMeshAgent agentChicken;
+    private Animator animator;
 
 
     // Start is called before the first frame update
     void Start()
     {
         agentChicken = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
         cholocateCount = 0;
         pepperCount = 0;
         seedCount = 0;
         totalFood = 0;
-        maxFoodValue = Random.Range(10, 25);
+        maxFoodValue = Random.Range(8, 12);
     }
 
     // Update is called once per frame
@@ -57,13 +59,15 @@ public class Chicken : MonoBehaviour
             InitiateLaying();
         }
 
-        // TESTING
-
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (agentChicken.velocity.magnitude < 0.15f)
         {
-            // Do whatever is being tested
-            // agentChicken.SetDestination(nest.transform.position);
-            //Debug.Log($"Am I (chicken) hungry?: {IsHungry}");
+            // chicken is not walking - disable animation
+            animator.SetBool("Walking", false);
+        }
+        else
+        {
+            // chicken is walking - enable animation
+            animator.SetBool("Walking", true);
         }
 
     }
